@@ -1,5 +1,23 @@
 import re
 
+pascal_file_path = 'example.pas'
+
+def read_pascal_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            content = file.read()
+            return content
+    except FileNotFoundError:
+        print(f"Arquivo '{file_path}' não encontrado.")
+    except Exception as e:
+        print(f"Erro ao ler o arquivo '{file_path}': {str(e)}")
+
+source_code = read_pascal_file(pascal_file_path)
+
+if source_code:
+    print(f"Conteúdo do arquivo '{pascal_file_path}':\n")
+    print(pascal_content)
+
 # Classe para representar um token
 class Token:
     def __init__(self, code, lexeme):
@@ -62,16 +80,6 @@ class Lexer:
             token = self.get_next_token()
 
         return self.tokens
-
-# Exemplo de uso
-source_code = """
-program exemplo;
-var
-    valorTotal: integer;
-begin
-    valorTotal := 1234;
-end.
-"""
 
 lexer = Lexer(source_code)
 tokens = lexer.tokenize()
